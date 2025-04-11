@@ -1,4 +1,5 @@
-import { cart } from "../data/cart";
+import { cart } from "../data/cart.js";
+import { products } from "../data/products.js";
 /*
 Step 1: Saving the data (data stucture)
 step 2: Use the data to generate the HTML: you can loop through the Array.
