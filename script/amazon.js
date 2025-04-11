@@ -119,15 +119,22 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         quantity: 1,
       });
     }
-    console.log(cart);
+
+    //Calculate the total quantity
+    // loop thorugh each object in the cart
+    let cartQuantity = 0;
+
+    cart.forEach((item) => {
+      //add all the item quantity and save it into the variable cartQuantity
+      cartQuantity += item.quantity;
+    });
+
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+
   });
 });
 
-/*<!–– the image has to exist in the sourse code/path. Note, we only have rating-45.png in the image folder that is why I am multiplying 4.5  by 10 to corrolate it with the existing image in the folder (the  object: product.image.stars * 10)––>. */
-
-/* <!––Data Atribute in HTML:  it allows to attach any feuture to an element.
-SYNTAX FOR DATA ATTRIBUTE:
-1-is just an HTML attribute
-2- it has to start with "data-"
-3- then give it any name e.g <"data-product-name=${product.name}">
-Note  that we have to separate the words with a dash, which known as KEBAB CASE,  IN HTML LIKE THIS; data-product-name––> */
+/*STEPS TO MAKE THE CART INAGE QUANTIRY
+1-calculate the cart quantity
+2-Put the quantity on the page using the DOM
+*/
