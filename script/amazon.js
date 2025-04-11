@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js";
+import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 /*
 Step 1: Saving the data (data stucture)
@@ -83,59 +83,37 @@ products.forEach((product) => {
 });
 
 /* HERE IS STEP 3:
-combine all the HTML and put it on the web page by using the DOM, DOM is when you get the HTML on the page and put it inside JavaScript.
-*/
-
-//the .innerHTML properties enable to change the HTML clas that iselected using javascript. thus here we are able to change the HTML to  productsHTML
+    combine all the HTML and put it on the web page by using the DOM, DOM is when you get the HTML on the page and put it inside JavaScript.
+    //the .innerHTML properties enable to change the HTML clas that iselected using javascript. thus here we are able to change the HTML to  productsHTML
+    */
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
+function updateCartQuantity() {
+  /*STEPS TO UPDATE CART QUANTITY
+   1-calculate the cart quantity
+    2-Put the quantity on the page using the DOM
+  */
+  //Calculate the total quantity
+  // loop thorugh each object in the cart
+  let cartQuantity = 0;
+
+  cart.forEach((cartItem) => {
+    //add all the item quantity and save it into the variable cartQuantity
+    cartQuantity += cartItem.quantity;
+  });
+
+  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+}
 
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     /*
-    //Getting a product from HTMLwhen the button is clicked
-    //the dataset attribute will display all the data-product-name in the html.The dataset gives us all the attribute that are attached to our product. also the dataset attribute works like an object. NOTE; the product name must be in Camel casing here */
+      //Getting a product from HTMLwhen the button is clicked
+      //the dataset attribute will display all the data-product-name in the html.The dataset gives us all the attribute that are attached to our product. also the dataset attribute works like an object. NOTE; the product name must be in Camel casing here */
     // const productName = button.dataset.productName;
     const productId = button.dataset.productId;
-
-    /* Steps to increase the number of quatity in the cart (object in cart Array) if a customer wants to buy two or more of the same product:
-1-check if the product is already in the cart.
-2- if product is the cart, increase the quantity.
-3-if it is not in the cart, add it to the cart.
-*/
-    //to check if a product is already in the cart, we loop through the cart array
-    let matchingItem;
-
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-
-    //if product is the cart, increase the quantity. Note: the  quantity can be found below when we add a product to cart.
-    if (matchingItem) {
-      matchingItem.quantity += 1;
-    } else {
-      // adding a product to the cart
-      cart.push({
-        productId: productId,
-        quantity: 1,
-      });
-    }
-
-    /*STEPS TO MAKE THE CART INAGE QUANTIRY
-      1-calculate the cart quantity
-      2-Put the quantity on the page using the DOM
-    */
-    //Calculate the total quantity
-    // loop thorugh each object in the cart
-    let cartQuantity = 0;
-
-    cart.forEach((item) => {
-      //add all the item quantity and save it into the variable cartQuantity
-      cartQuantity += item.quantity;
-    });
-
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+    addToCart(productId);
+    updateCartQuantity();
   });
 });
 
