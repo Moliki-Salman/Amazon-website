@@ -1,3 +1,4 @@
+import { cart } from "../data/cart";
 /*
 Step 1: Saving the data (data stucture)
 step 2: Use the data to generate the HTML: you can loop through the Array.
@@ -120,6 +121,10 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
       });
     }
 
+    /*STEPS TO MAKE THE CART INAGE QUANTIRY
+      1-calculate the cart quantity
+      2-Put the quantity on the page using the DOM
+    */
     //Calculate the total quantity
     // loop thorugh each object in the cart
     let cartQuantity = 0;
@@ -130,11 +135,18 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     });
 
     document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-
   });
 });
 
-/*STEPS TO MAKE THE CART INAGE QUANTIRY
-1-calculate the cart quantity
-2-Put the quantity on the page using the DOM
+/*Module: contains a variable inside a file by prevently anform of conflict is another file has the same variable name.
+CREATE A MODULE:
+1-create a file
+2-Dont load the file with a script tag <script> by doing this any variable we create inside the file will be contained inside the file and will not cause NAMING CONFLICTS.
+*/
+
+/*
+GETTING A VARIABLE OUT OF A FILE
+1-Add type= "module" attribute: the type= "module" attibute basically let a file get variables out of other files.
+2- Export
+3- Import
 */
