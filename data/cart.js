@@ -1,4 +1,13 @@
-export const cart = [];
+export let cart = [
+  {
+    productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+    quantity: 2,
+  },
+  {
+    productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+    quantity: 1,
+  },
+];
 
 export function addToCart(productId) {
   /* Steps to increase the number of quatity in the cart (object in cart Array) if a customer wants to buy two or more of the same product:
@@ -25,4 +34,23 @@ export function addToCart(productId) {
       quantity: 1,
     });
   }
+}
+
+/* STEPS TO REMOVEA PRODUCT FROM CAER
+1-create a new array
+2- Loop through the cart
+3-Add each product to the newArray except this productId
+*/
+export function removeFromCart(productId) {
+  const newCart = [];
+
+  //the loop result will contain all the product that do notmatch the product that was deleted
+  cart.forEach((cartItem) => {
+    //if cartItem is notequal to the productId we are looking,for, add it to the newCart.
+    if (cartItem !== productId) {
+      newCart.push(cartItem);
+    }
+  });
+
+cart = newCart
 }
