@@ -1,5 +1,6 @@
 import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
+import { formatCurrency } from "./utils/money.js";
 /*
 Step 1: Saving the data (data stucture)
 step 2: Use the data to generate the HTML: you can loop through the Array.
@@ -41,8 +42,8 @@ products.forEach((product) => {
           </div>
 
           <!-- 100 cents = 1 doller. to save the prices in dollers on the page -->
-            $${(product.priceCents / 100).toFixed(
-              2
+            $${formatCurrency(
+              product.priceCents
             )} <!-- toFixed() convertsthe number to strings and makes it have2 decimals-->
           </div>
 
