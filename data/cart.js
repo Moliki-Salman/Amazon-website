@@ -36,7 +36,7 @@ export function addToCart(productId) {
   }
 }
 
-/* STEPS TO REMOVEA PRODUCT FROM CAER
+/* STEPS TO REMOVE A PRODUCT FROM CAER
 1-create a new array
 2- Loop through the cart
 3-Add each product to the newArray except this productId
