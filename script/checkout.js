@@ -20,10 +20,8 @@ CALCULATE DELIVERY DATE
 3-Display the date in easy to read format.
 */
 const today = dayjs();
-//it added 7day to today
-const deliveryDate = today.add(7, "days");
-// .format() helps to display the date in an easy to read format.
-console.log(deliveryDate.format("dddd, MMMM D"));
+const deliveryDate = today.add(7, "days"); //it added 7day to today
+console.log(deliveryDate.format("dddd, MMMM D")); // .format() helps to display the date in an easy to read format.
 
 /*when we select a delivery Option, we  ned to update the page.you can update the page by reruning the html code and regenerate all the html. Do this buy putting alll the codes in a function and rerun the function.we put all the previous code in a function*/
 
@@ -161,13 +159,24 @@ function renderOrderSummary() {
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
     element.addEventListener("click", () => {
       const { productId, deliveryOptionId } = element.dataset;
-      updateDeliveryOption(productId, deliveryOptionId);
-      /*here is where we rerun the code ny regenerating all the html
--Note: we are calling the rrenderOrderSummary() function inside renderOrderSummary() function; this is possibele because a function can actually call or rerun itself and this feuture is called RECURSION. recursion is useful when a function needs to rerun all of its code.
-*/
-      renderOrderSummary();
+      updateDeliveryOption(productId, deliveryOptionId); //updated our data(Model)
+      renderOrderSummary(); //Recursion was done here, thi is where we rerun the code ny regenerating all the html. explanation below. then the updated Model regenerates the View here
     });
   });
 }
 
 renderOrderSummary();
+
+/*
+      -Note: we are calling the renderOrderSummary() function inside renderOrderSummary() function; this is possibele because a function can actually call or rerun itself and this feuture is called RECURSION. recursion is useful when a function needs to rerun all of its code..
+      Summmary: 1:update the data and 2- Regenerate all the HTML = MVC
+      MVC means Model-View-Controller.
+
+      In MVC: We splits our code into 3 parts:
+        1- Model = Saves and manages the data. In this project our data folder is the model
+        2- View = takes the data and displays it on the page: In this project, the checkout.js is the view.
+        3- Controller = runs some codes when we interact with the page. In the projects the eventlisteners because they do something when er interact with the page.
+        -Thus the Model is used to generate the view and when the View (page) isinteracted with, it will run some Controllers.And the the controller will update the Model. Then the updated Model regenerates the View.
+        Summary:MVC =makes sure the pages always mayches the data. MVC is known as a design pattern. is a way to organise and design our code.
+          -You can also use javascript frameworks to build and design your website. Many Javascrips frameworks are based on MVC
+        */
