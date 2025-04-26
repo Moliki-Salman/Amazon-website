@@ -1,3 +1,4 @@
+
 export let cart = JSON.parse(localStorage.getItem("cart"));
 //the esence of saving our cart with local storageis to save whateverwe have saved in the  cart because if this is not done, once the page isdone everything in the pagefreshes and forgets every action done on the page.
 
