@@ -1,24 +1,29 @@
+export let cart;
 
-export let cart = JSON.parse(localStorage.getItem("cart"));
-//the esence of saving our cart with local storageis to save whateverwe have saved in the  cart because if this is not done, once the page isdone everything in the pagefreshes and forgets every action done on the page.
+loadFromStorage();
 
-// this gives the cart a default value, so thatit doesnt throw a null error.
-if (!cart) {
-  cart = [
-    {
-      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-      quantity: 2,
-      deliveryOptionId: "1",
-    },
-    {
-      productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-      quantity: 1,
-      deliveryOptionId: "2",
-    },
-  ];
+export function loadFromStorage() {
+  cart = JSON.parse(localStorage.getItem("cart"));
+  //the esence of saving our cart with local storageis to save whatever we have saved in the  cart because if this is not done, once the page isdone everything in the pagefreshes and forgets every action done on the page.
+
+  // this gives the cart a default value, so thatit doesnt throw a null error.
+  if (!cart) {
+    cart = [
+      {
+        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+        quantity: 2,
+        deliveryOptionId: "1",
+      },
+      {
+        productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+        quantity: 1,
+        deliveryOptionId: "2",
+      },
+    ];
+  }
 }
 
-//save cart to local storage.local storage can lnly save strings. the first parameter in localstorage method is the name we want to attribute to the localstorage and the second parameter is the string that will be saved. JSON
+//save cart to local storage.local storage can only save strings. the first parameter in localstorage method is the name we want to attribute to the localstorage and the second parameter is the string that will be saved. JSON
 function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
