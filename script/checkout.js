@@ -1,5 +1,6 @@
 import { renderOrderSummary } from "../script/checkout/orderSummary.js";
 import { renderPaymentSummary } from "../script/checkout/paymentSummary.js";
+import "../data/cart.oop.js";
 
 renderOrderSummary();
 renderPaymentSummary();
