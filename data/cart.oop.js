@@ -1,8 +1,8 @@
-function Cart() {
+function Cart(localStorageKey) {
   const cart = {
     cartItems: undefined,
 
-    loadFromStorage(localStorageKey) {
+    loadFromStorage() {
       //this here respresent the object cart
       this.cartItems = JSON.parse(localStorage.getItem(localStorageKey));
       if (!this.cartItems) {
@@ -21,7 +21,7 @@ function Cart() {
       }
     },
 
-    saveToStorage(localStorageKey) {
+    saveToStorage() {
       localStorage.setItem(localStorageKey, JSON.stringify(this.cartItems));
     },
 
@@ -88,3 +88,4 @@ console.log(cart);
 console.log(businessCart);
 
 //in object Oriented Program: use PascalCase for things that generates objects. PascalCase starts every word a capital letter
+//Class : is a better way to generate object. it is considered an object generator
