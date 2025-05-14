@@ -1,17 +1,18 @@
 class Cart {
-  cartItems;
-  localStorageKey = undefined;
+  cartItems; // this with out an hash , so it is a public property that can be used anywhere.
+  #localStorageKey; //the hash added makes it a private property that can only be used inside this class
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
+    this.#localStorageKey = localStorageKey;
     // businessCart.localStorageKey = "cart-business";
 
-    this.loadFromStorage();
+    this.#loadFromStorage();
     // businessCart.loadFromStorage();
   }
 
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  //the hash sign make #loadFromStorage() private; it can only be used inside of this class
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
     if (!this.cartItems) {
       this.cartItems = [
         {
@@ -29,7 +30,7 @@ class Cart {
   }
 
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
@@ -95,4 +96,7 @@ Object Oriented programming = Organizing our code into Objects (tries  to repres
 Class = helps us generate these objects.
 Benfits of classes
 1-Constuctur: it is a feature that allows to run set up code inside an object.
+2-Classes also have another important feautures that is called PRIVATE PROPERTIES AND METHODS.
+Private: Private in a class = it camonly be accessed inside a particular class. to make a property private, you had the hash sign '#' infront of the  property
+3-Also to make a METHOD private, add  the hash sign '#' infront of the Method/function. The approprate word is METHOD
 */
