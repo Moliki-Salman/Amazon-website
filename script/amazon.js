@@ -35,16 +35,14 @@ products.forEach((product) => {
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${product.rating.stars * 10}.png">
+              src="${product.getStarsUrl()}">
             <div class="product-rating-count link-primary">
               ${product.rating.count}
             </div>
           </div>
 
           <!-- 100 cents = 1 doller. to save the prices in dollers on the page -->
-            $${formatCurrency(
-              product.priceCents
-            )} <!-- toFixed() convertsthe number to strings and makes it have2 decimals-->
+            ${product.getPrice()} <!-- toFixed() convertsthe number to strings and makes it have2 decimals-->
           </div>
 
           <div class="product-quantity-container">

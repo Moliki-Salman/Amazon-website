@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "../script/checkout/orderSummary.js";
 import { renderPaymentSummary } from "../script/checkout/paymentSummary.js";
-import "../data/cart-class.js";
+//import "../data/cart-class.js";
 
 renderOrderSummary();
 renderPaymentSummary();
@@ -10,3 +10,4 @@ STEPS:
 2-for each product, price amd quantity,
 3- Add everything together
 */
+

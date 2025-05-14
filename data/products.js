@@ -1,3 +1,5 @@
+import { formatCurrency } from "../script/utils/money.js";
+
 export function getProduct(productId) {
   //use thisto search for the product from product.js
   let matchingProduct;
@@ -9,6 +11,33 @@ export function getProduct(productId) {
   return matchingProduct;
 }
 
+//using a CLass to generate object
+class Product {
+  id;
+  image;
+  rating;
+  priceCents;
+
+  //remember constructor is the setup code, where you add the values to the property.Thus when ever we generate an object it will automatically run the constructor.
+  // the productDetails here is the paprmeter where we save the  all data coming from any new class object that is created from  new Product()
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+  }
+
+  //Method to calculate stars, it allows each product to be able to constructs its own starUrl
+  getStarsUrl() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getPrice() {
+    return `$${formatCurrency(this.priceCents)}`;
+  }
+}
+
+//Generating a product using the class
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -480,4 +509,21 @@ export const products = [
     priceCents: 2400,
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
-];
+].map((productDetails) => {
+  //map usually creates a new array, when ever we return from this inner function, its going to go inside the new array. Thus the result will be put in a new array when we add return
+  return new Product(productDetails); //here we just convert each object in the array to class
+});
+
+/*
+
+EXPLAINATION OF THE ABBOVE
+loup through the array  using the .map() method and use code to convert/generate the object.taking each object/value in the array and save it inside the parameter productDetails
+
+
+diagram to explain a .map() method above :  we take each value in an array, we runs the function of it  and transform it and add it in a new array.Thus transforming each of the object into a class.
+[
+product1, ====> function ====> new product(product1);
+product2 ====> function ====> new product(product2);
+product3 ====> function ====> new product(product3);
+]
+*/
