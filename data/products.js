@@ -35,7 +35,35 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    //the parent class has to have the same method as the child class but the method in the child class can overide the pareny class
+    return "";
+  }
 }
+
+class Clothing extends Product {
+  sizeChartLink;
+  constructor(productDetails) {
+    super(productDetails); //calls and inheritring the parent constructur.
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  //METHOD OVERIDING: this will over ride the method in the parent class
+  extraInfoHTML() {
+    // super.extraInfoHTML() calls and inheriting the parent method
+    return `
+    <a href="${this.sizeChartLink}"  target="_blank">
+    Size Chart
+    </a>
+    `;
+  }
+}
+
+/*const date = new Date()
+console.log(date)
+console.log(date.toLocaleTimeString())
+*/
 
 //Generating a product using the class
 export const products = [
@@ -510,15 +538,19 @@ export const products = [
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
 ].map((productDetails) => {
-  //map usually creates a new array, when ever we return from this inner function, its going to go inside the new array. Thus the result will be put in a new array when we add return
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails); //here we just convert each object in the array to class
 });
 
 /*
+convert object into a clothing class
 
 EXPLAINATION OF THE ABBOVE
 loup through the array  using the .map() method and use code to convert/generate the object.taking each object/value in the array and save it inside the parameter productDetails
 
+//map usually creates a new array, when ever we return from this inner function, its going to go inside the new array. Thus the result will be put in a new array when we add return
 
 diagram to explain a .map() method above :  we take each value in an array, we runs the function of it  and transform it and add it in a new array.Thus transforming each of the object into a class.
 [
@@ -527,3 +559,38 @@ product2 ====> function ====> new product(product2);
 product3 ====> function ====> new product(product3);
 ]
 */
+
+//inheretance let us reuse codebetween clases.This is where s class can get all the properties and methods from another class. Thus the child class inherites from the parent class, thus creating a relationship between classes.
+
+/* The "this" feature used in n object or class lets an object access its own prperties and methods. However, in JavaScript  "this" can be used anywhere in our code
+console.log(this); // this isresult to undefined because it not pointing to any object.
+
+
+const object2 = {
+  a: 2,
+  b: this.a, // Object2 has not be created yet. this = undefined,
+};
+
+Thus, "this"  is usually used inside a method/function  that has objects, but this will not work  for just an ordinally object that is NOT inside a method/function.
+
+console.log(object2.b)
+
+function logThis(){
+console.log(this) // i
+
+
+*/
+//Point 1: inside a Method, this poinyts to the outer object. it will work.
+//Point 2:Inside a function, we can change this to whatever we want using a methos like the .call(). it will be undefined because although its inside a function, it is NOT pointing to an object inside the function. Thus it will only work for a  function/class that has an object inside of it.
+
+function logThis() {
+  console.log(this);
+}
+logThis.call("HELLO"); // .call() is a method that every function has. here it allow to set a value for this. s
+
+//point 3: Arrow function do not change the value  of this. Below this will work as if it is outside of a function where it has no object to point to.
+const object3 = {
+  method: () => {
+    console.log(this); // this here keeps the value outdide of the arrow function.,will reslt to undefinedß
+  },
+};

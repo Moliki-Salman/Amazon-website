@@ -30,9 +30,6 @@ products.forEach((product) => {
             ${product.name}
           </div>
 
-
-            <!–– COMMENT-the image has to exist in the sourse code/path. Note, we only have rating-45.png in the image folder that is why I am multiplying 4.5  by 10 to corrolate it with the existing image in the folder (the  object: product.image.stars * 10)––>
-
           <div class="product-rating-container">
             <img class="product-rating-stars"
               src="${product.getStarsUrl()}">
@@ -40,9 +37,7 @@ products.forEach((product) => {
               ${product.rating.count}
             </div>
           </div>
-
-          <!-- 100 cents = 1 doller. to save the prices in dollers on the page -->
-            ${product.getPrice()} <!-- toFixed() convertsthe number to strings and makes it have2 decimals-->
+            ${product.getPrice()}
           </div>
 
           <div class="product-quantity-container">
@@ -60,20 +55,14 @@ products.forEach((product) => {
             </select>
           </div>
 
+          ${product.extraInfoHTML()}
+
           <div class="product-spacer"></div>
 
           <div class="added-to-cart">
             <img src="images/icons/checkmark.png">
             Added
           </div>
-
-            <!––COMMENT-Data Atribute in HTML:  it allows to attach any feuture to an element.
-            SYNTAX FOR DATA ATTRIBUTE:
-            1-is just an HTML attribute
-            2- it has to start with "data-"
-            3- then give it any name e.g <"data-product-name
-            Note  that we have to separate the words with a dash, which known as KEBAB CASE,  IN HTML LIKE THIS; data-product-name––>
-
           <button class="add-to-cart-button button-primary js-add-to-cart"
           data-product-id ="${product.id}">
             Add to Cart
@@ -127,4 +116,30 @@ GETTING A VARIABLE OUT OF A FILE
 1-Add type= "module" attribute: the type= "module" attibute basically let a file get variables out of other files.
 2- Export
 3- Import
+*/
+
+/*
+  ${product.extraInfoHTML()} = we used polymorphism to add some extra info for the product
+  polymorphism:  use a method without knowing the class.here we dont know if this a clothing class or product class classes are inside product.js file)
+
+<!––COMMENT-Data Atribute in HTML:  it allows to attach any feuture to an element.SYNTAX FOR DATA ATTRIBUTE:
+  1-is just an HTML attribute
+  2- it has to start with "data-"
+  3- then give it any name e.g <"data-product-name
+  Note  that we have to separate the words with a dash, which known as KEBAB CASE,  IN HTML LIKE THIS; data-product-name––>
+<button class="add-to-cart-button button-primary js-add-to-cart"
+    data-product-id ="${product.id}">
+    Add to Cart
+    </button>
+
+  <!–– COMMENT-the image has to exist in the sourse code/path. Note, we only have rating-45.png in the image folder that is why I am multiplying 4.5  by 10 to corrolate it with the existing image in the folder (the  object: product.image.stars * 10)––>
+
+<div class="product-rating-container">
+  <img class="product-rating-stars"
+    src="${product.getStarsUrl()}">
+  <div class="product-rating-count link-primary">
+    ${product.rating.count}
+  </div>
+</div>
+
 */
