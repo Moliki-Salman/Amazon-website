@@ -68,6 +68,34 @@ console.log(date.toLocaleTimeString())
 //loading the product from the backend
 export let products = [];
 
+//Fetch() is a better way to make http request. Fetch uses a Promise
+export function loadProductsFetch() {
+  const promise = fetch("https://supersimplebackend.dev/products")
+    .then((response) => {
+      //when we return; we are instructing the promise to wait for it to finish before going to the next step
+      return response.json();
+    })
+    .then((productData) => {
+      products = productData.map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails);
+        }
+        return new Product(productDetails); //here we just convert each object in the array to class
+      });
+
+      console.log("load products");
+    });
+
+  return promise;
+}
+
+/*
+loadProductsFetch().then(() => {
+  console.log("next step");
+});
+*/
+
+//makking http request with a XMLHttpRequest which ueses a callback funtion
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 

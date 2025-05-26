@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "../../script/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../data/cart.js";
-import { loadProducts } from "../../data/products.js";
+import { loadProducts, loadProductsFetch } from "../../data/products.js";
 
 describe("test suite: renderOrderSummary", () => {
   const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
@@ -8,9 +8,9 @@ describe("test suite: renderOrderSummary", () => {
 
   beforeAll((done) => {
     //done() let us control when to go to the next step, its like an await
-    loadProducts(() => {
+    loadProductsFetch().then(() => {
       done();
-    });
+    })
   });
 
   //Hooks:Hooks let us run some code for each test. Thehook share code between our test and removes duplication.
