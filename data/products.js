@@ -65,6 +65,32 @@ console.log(date)
 console.log(date.toLocaleTimeString())
 */
 
+//loading the product from the backend
+export let products = [];
+
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === "clothing") {
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails); //here we just convert each object in the array to class
+    });
+
+    console.log("load products");
+    fun();
+  });
+
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send();
+}
+// loadProducts();
+
+//put all the HTML CODE in a function and then put them into the product function
+
+/*
 //Generating a product using the class
 export const products = [
   {
@@ -543,6 +569,7 @@ export const products = [
   }
   return new Product(productDetails); //here we just convert each object in the array to class
 });
+*/
 
 /*
 convert object into a clothing class
