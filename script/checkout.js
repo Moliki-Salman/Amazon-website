@@ -7,16 +7,25 @@ import { loadCart } from "../data/cart.js";
 
 //async makes a function return a promise, it basically raps the code in a promise
 //await let us wait for a promise to finish beforegoing to the next line. Thus, await lets us write asyncronous code like normal code
+// you can also use try/catch inside a normal code, not only for async/awai
+//throw: is used for manually creating an eror inside a try/catch
+//reject: is a function that let us create an error in the future
+
 async function loadPage() {
-  console.log("load page");
+  try {
+    //throw "error1";
+    await loadProductsFetch(); // it will wait for this line to finsih, get the response from backend before moving to the nect line
 
-  await loadProductsFetch(); // it will wait for this line to finsih, get the response from backend before moving to the nect line
-
-  const value = await new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
+    const value = await new Promise((resolve, reject) => {
+      //throw "error2";
+      loadCart(() => {
+        //reject("error3");
+        resolve();
+      });
     });
-  });
+  } catch (error) {
+    console.log("unexpected error: Please try again later");
+  }
 
   renderOrderSummary();
   renderPaymentSummary();
