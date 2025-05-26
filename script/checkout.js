@@ -5,9 +5,33 @@ import { loadCart } from "../data/cart.js";
 //import "../data/cart-class.js";
 //import  "../data/backend-practice.js"
 
+//async makes a function return a promise, it basically raps the code in a promise
+//await let us wait for a promise to finish beforegoing to the next line. Thus, await lets us write asyncronous code like normal code
+async function loadPage() {
+  console.log("load page");
+
+  await loadProductsFetch(); // it will wait for this line to finsih, get the response from backend before moving to the nect line
+
+  const value = await new Promise((resolve) => {
+    loadCart(() => {
+      resolve();
+    });
+  });
+
+  renderOrderSummary();
+  renderPaymentSummary();
+
+  return "value4"; // this converts or also mean resolve(value 4). Remember that the value of the return can be saved in the parameter of the next step which is in the .then()
+}
+
+loadPage();
+
+//console.log(value); // this is the value of the return above. whatever the async or the promise return, it is saved as a parameter for the next step .then() in the case of a promise, but the value is save into a new variable inside of an async/await
+
 //Promise.all() : let us run multiple promise at the same time and wait for all of them to finish.
+/*
 Promise.all([
-loadProductsFetch(),
+  loadProductsFetch(),
   new Promise((resolve) => {
     loadCart(() => {
       resolve();
@@ -18,6 +42,7 @@ loadProductsFetch(),
   renderOrderSummary();
   renderPaymentSummary();
 });
+*/
 
 //PROMISE: it allows javascript to do multiple things at the same time
 //the promise() function runs immediately
